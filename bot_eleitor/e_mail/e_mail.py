@@ -40,4 +40,3 @@ def enviar_email_anexo(destinatario, assunto, conteudo, arquivo_anexo):
    email.send_message(subject, body, to, attachments=files, use_html=True)
    # Fechar a conexão com os servidores IMAP e SMTP
    email.disconnect()
-

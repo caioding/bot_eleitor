@@ -9,19 +9,22 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from datetime import datetime
 
+def merge_pdfs(paths, output):
+    pdf_writer = PdfWriter()
+    
+    for path in paths:
+        pdf_reader = PdfReader(path)
+        for page in pdf_reader.pages:
+            pdf_writer.add_page(page)
+    
+    with open(output, 'wb') as out:
+        pdf_writer.write(out)
 
-def merge_pdfs(pdf_lista, arq_saida):
-    merger = PdfMerger()
-    
-    for pdf in pdf_lista:
-        merger.append(pdf)
-    
-    merger.write(arq_saida)
-    merger.close()
-  
+
+
 def criar_pdf_lista_produto(produtos):
-    arq_logo = 'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf\\banner.png'
-    arq_destino = 'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf\\ListaProduto.pdf'
+    arq_logo = 'D:\projetos-botcity\\revisao\\atividade03-botcity-email\\base-do-treino\\bot_flor_de_jambo\\pdf\\banner.png'
+    arq_destino = 'D:\projetos-botcity\\revisao\\atividade03-botcity-email\\base-do-treino\\bot_flor_de_jambo\\pdf\\ListaProduto.pdf'
     
     # Cria o documento PDF
     pdf = SimpleDocTemplate(arq_destino, pagesize=A4)
@@ -34,7 +37,7 @@ def criar_pdf_lista_produto(produtos):
     
     # Parágrafo de texto
     # paragrafo = Paragraph(texto, estilo_normal)
-    
+
     # Cabeçalho com imagem e título
     imagem = Image(arq_logo, width=320, height=50)
     titulo = Paragraph("Lista de Produto", estilo_titulo)
