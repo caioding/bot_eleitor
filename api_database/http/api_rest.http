@@ -128,6 +128,30 @@ Content-Type: application/json
     "senha": "1234",
     "email": "lrandrade20@gmail.com"
 }
+###
+
+POST http://127.0.0.1:5000/usuario
+Content-Type: application/json
+// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+
+{
+    "nome": "Bruno Pereira",
+    "login": "Bruno",
+    "senha": "1234",
+    "email": "bruno.pereira@ifam.edu.br"
+}
+###
+
+POST http://127.0.0.1:5000/usuario
+Content-Type: application/json
+// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+
+{
+    "nome": "Caio Cesar",
+    "login": "Caio",
+    "senha": "1234",
+    "email": "7caioc@gmail.com"
+}
 
 ###
 // Listar todos os usuários em ordem alfabética do nome
@@ -143,7 +167,7 @@ Content-Type: application/json
 ###
 // Deletar usuário pelo ID
 // http://127.0.0.1:5000/usuario/id
-DELETE http://127.0.0.1:5000/usuario/1
+DELETE http://127.0.0.1:5000/usuario/2
 Content-Type: application/json
 
 ###

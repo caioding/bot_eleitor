@@ -8,6 +8,7 @@ import requests
 from planilha.planilha import ler_excel
 from datetime import datetime
 from e_mail import e_mail
+from so.so import apagar_arquivos
 
 
 def api_lista_usuarios():
@@ -191,9 +192,14 @@ def main():
     for usuario in lista_produto:
         destinatario = usuario['email']
         print(f'Enviando e-mail para: {destinatario}')
-        assunto = "Lista de Produtos"
-        conteudo = "<h1>Sistema Automatizado!</h1> Em anexo, a lista de produtos."
+        assunto = "Eleitor"
+        conteudo = "<h1>Sistema automatizado de coleta de dados do Eleitor!</h1> Em anexo, os dados do Eleitor"
         e_mail.enviar_email_anexo(destinatario, assunto, conteudo,arq_anexo) 
+    
+    caminho_diretorio = r'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf'
+    padrao = '*.pdf'
+    apagar_arquivos(caminho_diretorio, padrao)
+
 
     print('Fim do processamento...')
     bot.stop_browser()
