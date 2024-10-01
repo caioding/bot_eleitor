@@ -133,7 +133,7 @@ def acessar_site(bot, arq_excel):
         imprimir_dados_extraidos(eleitor, mae, nascimento, cpf, dados_extraidos)
 
         # Salva o PDF com o nome completo
-        nome_arq_pdf = f'{cpf}_{dados_extraidos["nro_titulo"]}.pdf'  # Adicione a extensão .pdf aqui
+        nome_arq_pdf = f'{cpf}_{eleitor}.pdf'  # Adicione a extensão .pdf aqui
         # caminho_pdf = fr'/home/caio/bot_eleitor/bot_eleitor/pdf/{nome_arq_pdf}'
         caminho_pdf = fr'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf\{nome_arq_pdf}'
         bot.print_pdf(caminho_pdf)
