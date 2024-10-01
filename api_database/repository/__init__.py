@@ -1,5 +1,4 @@
-from repository import usuario
-from repository import produto
+
 from repository import database
 from repository import eleitor
 #import mysql.connector

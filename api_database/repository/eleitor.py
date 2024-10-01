@@ -1,122 +1,174 @@
-from repository import database
+import database
 
-# Inserir eleitor
-def criar_eleitor(eleitor):
+
+# Verificar se eleitor existe
+def verificar_eleitor_existe(cpf):
+    existe: False
+
     try:
-        # Manipular o banco de dados
         conect = database.criar_db()
-        cursor = conect.cursor()
-        sql = (
-            f"INSERT INTO eleitor(cpf, nome, data_nascimento, nome_mae, nro_titulo, situacao, secao, zona, local_votacao, endereço, bairro, municipio_uf, pais) "
-            " VALUES('{eleitor['cpf']}','{eleitor['nome']}', '{eleitor['data_nascimento']}', '{eleitor['nome_mae']}','{eleitor['nro_titulo']}', "
-            " '{eleitor['situacao']}', '{eleitor['secao']}','{eleitor['zona']}','{eleitor['local_votacao']}','{eleitor['endereço']}','{eleitor['bairro']}', "
-            " '{eleitor['municipio_uf']}','{eleitor['pais']}' )"
-        )
-        
-        print(sql)
-        cursor.execute(sql)
-        conect.commit()
-    except Exception as ex:
-        print(f'Erro: Falha na inclusão: {ex}')
-    finally:
-        cursor.close()
-        conect.close()
-# Fim: criar_eleitor(produto)
-
-# Ver se eleitor existe 
-def existe_eleitor(cpf):
-    exite: False
-    eleitor = ()
-    try:
-        conect = database.criar_db
         cursor = conect.cursor()
         sql = f"SELECT * FROM eleitor WHERE cpf = '{cpf}'"
+
         cursor.execute(sql)
-        eleitor = cursor.fetchone()
-        if eleitor is not None:
-            if len(eleitor) == 1:
-                exite = True
-            else:
-                exite = False
+        lista_eleitores = cursor.fetchall()
+
+        if len(lista_eleitores) == 0:
+            existe = False
         else:
-            exite = False
+            existe = True
+
     except Exception as ex:
-        print(f'Erro: Ver se eleitor existe: {ex}')
-    finally:
-        cursor.close()
-        conect.close()
-    return exite
+        print(f"Erro: {ex}")
 
-# Fim: existe_eleitor
+    return existe
 
-# Obter o eleitor pelo cpf
-def obter_eleitor_cpf(cpf):
-    eleitor = ()
+
+# Add eleitor com as devidas informações
+def criar_eleitor(eleitor):
     try:
         conect = database.criar_db()
-        cursor = conect.cursor() 
-        sql = f"SELECT * FROM eleitor WHERE cpf = '{cpf}'" 
+        cursor = conect.cursor()
+
+        # sql = f"INSERT INTO eleitor(cpf, nome, data_nascimento, nome_mae, cep, nro_endereco, nro_titulo, situacao, secao, zona, local_votacao, endereco_votacao, bairro, municipio_uf, pais) VALUES('{eleitor['cpf']}','{eleitor['nome']}', '{eleitor['data_nascimento']}', '{eleitor['nome_mae']}', '{eleitor['cep']}', '{eleitor['nro_endereco']}', '{eleitor['nro_titulo']}', '{eleitor['situacao']}', '{eleitor['secao']}', '{eleitor['zona']}', '{eleitor['local_votacao']}', '{eleitor['endereco_votacao']}', '{eleitor['bairro']}', '{eleitor['municipio_uf']}', '{eleitor['pais']}')"
+        sql = f"INSERT INTO eleitor(cpf, nome, data_nascimento, nome_mae, cep, nro_endereco, nro_titulo, situacao, secao, zona, local_votacao, endereco_votacao, bairro, municipio_uf, pais) VALUES('{eleitor['cpf']}','{eleitor['nome']}', '{eleitor['data_nascimento']}', '{eleitor['nome_mae']}', '{eleitor['cep']}', '{eleitor['nro_endereco']}', '{eleitor['nro_titulo']}', '{eleitor['situacao']}', '{eleitor['secao']}', '{eleitor['zona']}', '{eleitor['local_votacao']}', '{eleitor['endereco_votacao']}', '{eleitor['bairro']}', '{eleitor['municipio_uf']}', '{eleitor['pais']}')"
+
         cursor.execute(sql)
-        eleitor = cursor.fetchone()
+        ultimo_cpf = cursor.lastrowid
+        conect.commit()
+
     except Exception as ex:
-        print(f'Erro: Obter eleitor: {ex}')
+        print(f"Erro: {ex}")
+
     finally:
         cursor.close()
         conect.close()
-    return eleitor
 
-# Fim: obter_eleitor_cpf
-                  
-# Listar Eleitores
+    return ultimo_cpf
+
+
+# Fornecer lista de eleitores
 def lista_eleitores():
     eleitores = list()
+
     try:
         conect = database.criar_db()
         cursor = conect.cursor()
-        sql = 'SELECT * FROM eleitor ORDER BY nome'
+        sql = "SELECT * FROM eleitor ORDER BY nome"
+
         cursor.execute(sql)
-        lista_eleitor = cursor.fetchall()
-        # Tratar dados para uma estrutura JSON
-        for eleitor in lista_eleitor:
+        lista_eleitores = cursor.fetchall()
+
+        for eleitor in lista_eleitores:
+
             eleitores.append(
                 {
-                    'cpf': eleitor[0],
-                    'nome': eleitor[1],
-                    'data_nascimento': eleitor[2],
-                    'nome_mae': eleitor[3],
-                    'nro_titulo': eleitor[4],
-                    'situacao': eleitor[5],
-                    'secao': eleitor[6],
-                    'zona': eleitor[7],
-                    'local_votacao': eleitor[8],
-                    'endereço': eleitor[9],
-                    'bairro': eleitor[10],
-                    'municipio_uf': eleitor[11],
-                    'pais': eleitor[12]
+                    "cpf": eleitor[0],
+                    "nome": eleitor[1],
+                    "data_nascimento": eleitor[2],
+                    "nome_mae": eleitor[3],
+                    "cep": eleitor[4],
+                    "nro_endereco": eleitor[5],
+                    "nro_titulo": eleitor[6],
+                    "situacao": eleitor[7],
+                    "secao": eleitor[8],
+                    "zona": eleitor[9],
+                    "local_votacao": eleitor[10],
+                    "endereco_votacao": eleitor[11],
+                    "bairro": eleitor[12],
+                    "municipio_uf": eleitor[13],
+                    "pais": eleitor[14],
                 }
             )
+
     except Exception as ex:
-        print(f'Erro: Listar eleitores: {ex}')
+        print(f"Erro: {ex}")
+
     finally:
         cursor.close()
         conect.close()
+
     return eleitores
 
-# Fim: lista_eleitores
 
-# Deletar eleitor pelo cpf
-def deletar_eleitor(cpf):
+# Buscar eleitor pelo cpf
+def obter_eleitor_cpf(cpf):
+    eleitores = list()
+
     try:
-        # Manipular o banco de dados
         conect = database.criar_db()
         cursor = conect.cursor()
-        sql = f"DELETE FROM eleitor WHERE cpf = '{cpf}'"
+        sql = f"SELECT * FROM eleitor WHERE cpf = '{cpf}'"
+
         cursor.execute(sql)
-        conect.commit()
+        lista_eleitores = cursor.fetchall()
+
+        for eleitor in lista_eleitores:
+
+            eleitores.append(
+                {
+                    "cpf": eleitor[0],
+                    "nome": eleitor[1],
+                    "data_nascimento": eleitor[2],
+                    "nome_mae": eleitor[3],
+                    "cep": eleitor[4],
+                    "nro_endereco": eleitor[5],
+                    "nro_titulo": eleitor[6],
+                    "situacao": eleitor[7],
+                    "secao": eleitor[8],
+                    "zona": eleitor[9],
+                    "local_votacao": eleitor[10],
+                    "endereco_votacao": eleitor[11],
+                    "bairro": eleitor[12],
+                    "municipio_uf": eleitor[13],
+                    "pais": eleitor[14],
+                }
+            )
+
     except Exception as ex:
-        print(f'Erro: Falha na exclusão: {ex}')
+        print(f"Erro: {ex}")
+
     finally:
         cursor.close()
-        conect.close()  
+        conect.close()
 
-# Fim: deletar_eleitor
+    return eleitores
+
+
+# Atualizar infos cadastradas
+def atualizar_eleitor(eleitor):
+    try:
+        conect = database.criar_db()
+        cursor = conect.cursor()
+
+        # sql = f"UPDATE eleitor SET cpf = '{eleitor['cpf']}', nome = '{eleitor['nome']}', data_nascimento = '{eleitor['data_nascimento']}', nome_mae = '{eleitor['nome_mae']}', cep = '{eleitor['cep']}', nro_endereco = '{eleitor['nro_endereco']}', nro_titulo = '{eleitor['nro_titulo']}', situacao = '{eleitor['situacao']}', secao = '{eleitor['secao']}', zona = '{eleitor['zona']}', local_votacao = '{eleitor['local_votacao']}', endereco_votacao = '{eleitor['endereco_votacao']}', bairro = '{eleitor['bairro']}', municipio_uf = '{eleitor['municipio_uf']}', pais = '{eleitor['pais']}' WHERE cpf = '{eleitor['cpf']}'"
+
+        sql = f"UPDATE eleitor SET cpf = '{eleitor['cpf']}', nome = '{eleitor['nome']}', data_nascimento = '{eleitor['data_nascimento']}', nome_mae = '{eleitor['nome_mae']}', cep = '{eleitor['cep']}', nro_endereco = '{eleitor['nro_endereco']}' WHERE cpf = '{eleitor['cpf']}'"
+
+        cursor.execute(sql)
+        conect.commit()
+
+    except Exception as ex:
+        print(f"Erro: {ex}")
+
+    finally:
+        cursor.close()
+        conect.close()
+
+
+# Remover eleitor
+def deletar_eleitor(cpf):
+    try:
+        conect = database.criar_db()
+        cursor = conect.cursor()
+        sql = f"DELETE FROM eleitor WHERE cpf = {cpf}"
+
+        cursor.execute(sql)
+        conect.commit()
+
+    except Exception as ex:
+        print(f"Erro: {ex}")
+
+    finally:
+        cursor.close()
+        conect.close()

@@ -18,15 +18,15 @@ CREATE TABLE usuario(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE produto(
-    id int AUTO_INCREMENT,
-    descricao varchar(50) NOT NULL,
-    unidade varchar(5) NOT NULL,
-    quantidade DECIMAL(10,2) NOT NULL,
-    preco_real DECIMAL(10,2) NOT NULL,
-    preco_dolar DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (id)
-);
+-- CREATE TABLE produto(
+--     id int AUTO_INCREMENT,
+--     descricao varchar(50) NOT NULL,
+--     unidade varchar(5) NOT NULL,
+--     quantidade DECIMAL(10,2) NOT NULL,
+--     preco_real DECIMAL(10,2) NOT NULL,
+--     preco_dolar DECIMAL(10,2) NOT NULL,
+--     PRIMARY KEY (id)
+-- );
 
 CREATE TABLE eleitor(
 cpf varchar(11) NOT NULL,
@@ -47,13 +47,13 @@ pais varchar(50) NOT NULL,
 PRIMARY KEY (cpf)
 );
 
-INSERT INTO produto(descricao,unidade,quantidade,preco_real,preco_dolar)
-VALUES('Acai','Litro',10,20.50,0.0);
+-- INSERT INTO produto(descricao,unidade,quantidade,preco_real,preco_dolar)
+-- VALUES('Acai','Litro',10,20.50,0.0);
 
-INSERT INTO produto(descricao,unidade,quantidade,preco_real,preco_dolar)
-VALUES('Tucuma','kg',20,15.30,0.0);
+-- INSERT INTO produto(descricao,unidade,quantidade,preco_real,preco_dolar)
+-- VALUES('Tucuma','kg',20,15.30,0.0);
 
-INSERT INTO produto(descricao,unidade,quantidade,preco_real,preco_dolar)
-VALUES('Tapioca','Und',10,5.60,0.0);
+-- INSERT INTO produto(descricao,unidade,quantidade,preco_real,preco_dolar)
+-- VALUES('Tapioca','Und',10,5.60,0.0);
 
 -- Inserir registros na tabela Produto
