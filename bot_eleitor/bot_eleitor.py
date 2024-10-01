@@ -7,8 +7,12 @@ from pdf.pdf import merge_pdfs
 import requests
 from planilha.planilha import ler_excel
 from datetime import datetime
+from e_mail import e_mail
 
 
+def api_lista_usuarios():
+    http=BotHttpPlugin('http://127.0.0.1:5000/usuario')
+    return http.get_as_json()
 
 def extrair_dados(bot):
     dados = {}
@@ -129,7 +133,8 @@ def acessar_site(bot, arq_excel):
 
         # Salva o PDF com o nome completo
         nome_arq_pdf = f'{cpf}_{dados_extraidos["nro_titulo"]}.pdf'  # Adicione a extensão .pdf aqui
-        caminho_pdf = fr'/home/caio/bot_eleitor/bot_eleitor/pdf/{nome_arq_pdf}'
+        # caminho_pdf = fr'/home/caio/bot_eleitor/bot_eleitor/pdf/{nome_arq_pdf}'
+        caminho_pdf = fr'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf\{nome_arq_pdf}'
         bot.print_pdf(caminho_pdf)
 
         # Aguardar um pouco para garantir que o PDF foi salvo
@@ -160,7 +165,7 @@ def acessar_site(bot, arq_excel):
 
     # Chama a função de mesclagem após processar todos os eleitores
     if lista_pdf:
-        caminho_saida = r'/home/caio/bot_eleitor/bot_eleitor/pdf/merged_output.pdf'
+        caminho_saida = r'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf\\merged_output.pdf'
         merge_pdfs(lista_pdf, caminho_saida)
         print(f"PDFs mesclados em: {caminho_saida}")
 
@@ -176,8 +181,19 @@ def main():
     print('Inicio do processamento...')
     bot.start_browser()
     bot.maximize_window()
-    arq_excel = r'/home/caio/bot_eleitor/bot_eleitor/planilha/RelacaoEleitor.xlsx'
+    arq_excel = r'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\planilha\\RelacaoEleitor.xlsx'
     acessar_site(bot, arq_excel)
+
+    print('Enviando E-mail para a lista de usuario com arquivo Produtos.pdf em anexo.')
+    arq_anexo = r'C:\\Users\\noturno\\prova_botcity\\bot_eleitor\\pdf\\merged_output.pdf'
+    retornoJSON_usuarios = api_lista_usuarios()
+    lista_produto = retornoJSON_usuarios['dados']
+    for usuario in lista_produto:
+        destinatario = usuario['email']
+        print(f'Enviando e-mail para: {destinatario}')
+        assunto = "Lista de Produtos"
+        conteudo = "<h1>Sistema Automatizado!</h1> Em anexo, a lista de produtos."
+        e_mail.enviar_email_anexo(destinatario, assunto, conteudo,arq_anexo) 
 
     print('Fim do processamento...')
     bot.stop_browser()

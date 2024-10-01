@@ -5,10 +5,10 @@ def criar_db():
     try:
         # Configuração do Banco de Dados MySQL
         mydb = mysql.connector.connect(
-            host='172.17.0.2',
+            host='localhost',
             port='3306',
-            user='mydb',
-            password='neosdb',
+            user='root',
+            password='',
             database='banco'
         )
     except Exception as ex:
