@@ -6,7 +6,7 @@ import os
 module = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "repository"))
 sys.path.append(module)
 
-import eleitor  # noqa: E402
+import eleitor
 import usuario
 
 app_api = Flask("bot_eleitor")
@@ -26,7 +26,6 @@ def criar_eleitor():
     # cpf_eleitor=0
 
     try:
-        # cpf_eleitor = eleitor.criar_eleitor(eleitor_json)  # noqa: F841
         eleitor.criar_eleitor(eleitor_json)
         successo = True
         _messagemm = "Eleitor Inserido!"
@@ -127,9 +126,7 @@ def criar_usuario():
 # Atualizar usuário
 @app_api.route('/usuario', methods=['PUT'])
 def atualizar_usuario():
-    # Construir um Request
-    # Captura o JSON com os dados enviado pelo cliente
-    usuario_json = request.json # corpo da requisição
+    usuario_json = request.json
     id = int(usuario_json['id'])
     try:
         if usuario.existe_usuario(id) == True:

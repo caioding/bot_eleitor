@@ -2,7 +2,6 @@
 import database
 
 # Inserir usuario
-# Inseri um novo usuario e retorna o ID
 def criar_usuario(usuario):
     try:
         # Manipular o banco de dados
