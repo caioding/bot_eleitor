@@ -12,14 +12,17 @@ import usuario
 app_api = Flask("bot_eleitor")
 app_api.config["JSON_SORT_KEYS"] = False
 
+# --------------------------------------------------------
+#           Inicio: Serviços da api eleitor 
+# --------------------------------------------------------
 
-# Rota pra inicio da API #
+# Rota pra inicio da API
 @app_api.route("/", methods=["GET"])
 def hello_world():
     return "API do Eleitor - OK"
 
 
-# -- Inicio: Serviços da api usuário
+# Inserir Eleitor
 @app_api.route("/eleitor", methods=["POST"])
 def criar_eleitor():
     eleitor_json = request.json
@@ -36,7 +39,9 @@ def criar_eleitor():
 
     return make_response(jsonify(status=successo, message=_messagemm))
 
+# Fim: criar_eleitor()
 
+# Listar eleitores
 @app_api.route("/eleitor", methods=["GET"])
 def lista_eleitores():
     lista_eleitores = list()
@@ -51,7 +56,9 @@ def lista_eleitores():
 
     return make_response(jsonify(status=successo, message=_messagem, data=lista_eleitores))
 
+# Fim: lista_eleitores()
 
+# Obter eleitor pelo cpf
 @app_api.route("/eleitor/<int:cpf>", methods=["GET"])
 def obter_eleitor_cpf(cpf):
     eleitor_cpf = list()
@@ -66,7 +73,9 @@ def obter_eleitor_cpf(cpf):
 
     return make_response(jsonify(status=successo, _messagem=_messagem, data=eleitor_cpf))
 
+# Fim: obter_eleitor_cpf()
 
+# Atualizar eleitor
 @app_api.route("/eleitor", methods=["PUT"])
 def atualizar_eleitor():
     eleitor_json = request.json
@@ -82,7 +91,9 @@ def atualizar_eleitor():
 
     return make_response(jsonify(status=successo, message=_messagem))
 
+# Fim: atualizar_eleitor()
 
+# Deletar eleitor
 @app_api.route("/eleitor/<int:cpf>", methods=["DELETE"])
 def deletar_eleitor(cpf):
     try:
@@ -96,13 +107,15 @@ def deletar_eleitor(cpf):
 
     return make_response(jsonify(status=successo, mensagem=_messagem))
 
-# Usuário
+# Fim: deletar_eleitor()
+
+# --------------------------------------------------------
+#           Inicio: Serviços da api usuário 
+# --------------------------------------------------------
 
 # Inserir usuário
 @app_api.route('/usuario', methods=['POST'])
 def criar_usuario():
-    # Construir um Request
-    # Captura o JSON com os dados enviado pelo cliente
     usuario_json = request.json # corpo da requisição
     id_usuario=0
     try:
@@ -114,7 +127,6 @@ def criar_usuario():
         _mensagem = f'Erro: Inclusao do usuario: {ex}'
     
     return make_response(
-        # Formata a resposta no formato JSON
         jsonify(
                 status = sucesso,
                 mensagem = _mensagem ,
@@ -141,7 +153,6 @@ def atualizar_usuario():
         _mensagem = f'Erro: Alteracao do usuario: {ex}'
     
     return make_response(
-        # Formata a resposta no formato JSON
         jsonify(
                 status = sucesso,
                 mensagem = _mensagem
@@ -164,7 +175,6 @@ def deletar_usuario(id):
         _mensagem = f'Erro: Exclusao de usuario: {ex}'
     
     return make_response(
-        # Formata a resposta no formato JSON
         jsonify(
                 status = sucesso,
                 mensagem = _mensagem
@@ -174,7 +184,6 @@ def deletar_usuario(id):
 # Serviço: Obter usuário pelo id
 @app_api.route('/usuario/<int:id>', methods=['GET'])
 def obter_usuario_id(id):
-    # Declarando uma tupla vazia
     usuario_id = ()
     sucesso = False
     if usuario.existe_usuario(id) == True:
@@ -184,9 +193,7 @@ def obter_usuario_id(id):
     else:
         sucesso = False
         _mensagem = 'Usuario existe'
-    # Construir um Response
     return make_response(
-        # Formata a resposta no formato JSON
         jsonify(
                 status = sucesso, 
                 mensagem = _mensagem,
@@ -207,9 +214,7 @@ def lista_usuarios():
         sucesso = True
         _mensagem = 'Lista de usuario'
 
-    # Construir um Response
     return make_response(
-        # Formata a resposta no formato JSON
         jsonify(
                 status = sucesso, 
                 mensagem = _mensagem,
@@ -217,6 +222,5 @@ def lista_usuarios():
         )
     )
 # Fim: lista_usuarios()
-
 
 app_api.run()
