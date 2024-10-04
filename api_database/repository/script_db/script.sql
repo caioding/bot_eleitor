@@ -10,7 +10,7 @@ GRANT ALL PRIVILEGES ON banco.* TO 'root' @'localhost';
 USE banco;
 -- Criar a tabela: usuario
 CREATE TABLE usuario(
-    id int AUTO_INCREMENT,
+    id int AUTO_INCREMENT,  
     nome varchar(50) NOT NULL,
     login varchar(20) NOT NULL,
     senha varchar(20) NOT NULL,

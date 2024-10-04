@@ -24,7 +24,7 @@ def verificar_eleitor_existe(cpf):
     return existe
 
 
-# Add eleitor com as devidas informações
+# Criar eleitor 
 def criar_eleitor(eleitor):
     try:
         conect = database.criar_db()
@@ -47,7 +47,7 @@ def criar_eleitor(eleitor):
     return ultimo_cpf
 
 
-# Fornecer lista de eleitores
+# Listar eleitores
 def lista_eleitores():
     eleitores = list()
 
@@ -91,7 +91,7 @@ def lista_eleitores():
     return eleitores
 
 
-# Buscar eleitor pelo cpf
+# Obter eleitor pelo cpf
 def obter_eleitor_cpf(cpf):
     eleitores = list()
 
@@ -135,7 +135,7 @@ def obter_eleitor_cpf(cpf):
     return eleitores
 
 
-# Atualizar infos cadastradas
+# Atualizar eleitor
 def atualizar_eleitor(eleitor):
     try:
         conect = database.criar_db()
@@ -156,7 +156,7 @@ def atualizar_eleitor(eleitor):
         conect.close()
 
 
-# Remover eleitor
+# Deletar eleitor
 def deletar_eleitor(cpf):
     try:
         conect = database.criar_db()
