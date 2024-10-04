@@ -1,56 +1,6 @@
-// Inserir PDF
-
-POST http://127.0.0.1:5000/usuario
-Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
-
-{
-    "nome": "Lucas da Rocha Andrade",
-    "login": "Lucas",
-    "senha": "1234",
-    "email": "lrandrade20@gmail.com"
-}
-###
-
-POST http://127.0.0.1:5000/usuario
-Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
-
-{
-    "nome": "Bruno Pereira",
-    "login": "Bruno",
-    "senha": "1234",
-    "email": "bruno.pereira@ifam.edu.br"
-}
-###
-
-POST http://127.0.0.1:5000/usuario
-Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
-
-{
-    "nome": "Caio Cesar",
-    "login": "Caio",
-    "senha": "1234",
-    "email": "7caioc@gmail.com"
-}
-
-###
-// Listar todos os usuários em ordem alfabética do nome
-GET http://127.0.0.1:5000/usuario 
-Content-Type: application/json
-
-###
-// Obter usuário pelo ID
-//GET http://127.0.0.1:5000/usuario/id
-GET http://127.0.0.1:5000/usuario/6
-Content-Type: application/json
-
-###
-// Deletar usuário pelo ID
-// http://127.0.0.1:5000/usuario/id
-DELETE http://127.0.0.1:5000/usuario/2
-Content-Type: application/json
+// ---------------------------------------------
+// Testar todos os servico da api para eleitor
+// ---------------------------------------------
 
 ###
 POST http://127.0.0.1:5000/eleitor
@@ -76,8 +26,8 @@ Content-Type: application/json
 }
 // Utiliza-se obrigatoriamente no início da linha os simbolos: ###
 // para separar uma requisção da outra. 
-###
 
+###
 POST http://127.0.0.1:5000/eleitor
 Content-Type: application/json
 // OBS: É necessário pular uma linha, quando existir um corpo (body) 
@@ -101,15 +51,10 @@ Content-Type: application/json
 }
 // Utiliza-se obrigatoriamente no início da linha os simbolos: ###
 // para separar uma requisção da outra. 
-###
 
-// Listar todos os usuários em ordem alfabética do name
+###
+// Listar todos os eleitores 
 GET http://127.0.0.1:5000/eleitor
-Content-Type: application/json
-
-###
-// Deletar usuário pelo cpf
-DELETE http://127.0.0.1:5000/eleitor/4981577257
 Content-Type: application/json
 
 ###
@@ -117,17 +62,16 @@ Content-Type: application/json
 //GET http://127.0.0.1:5000/eleitor/{cpf}
 GET http://127.0.0.1:5000/eleitor/12345678900
 Content-Type: application/json
-###
 
+###
 // Alterar usuário pelo cpf
-// OBS: obrigado preencher o campo cpf
 PUT http://127.0.0.1:5000/eleitor
 Content-Type: application/json
 // OBS: É necessário pular uma linha, quando existir um corpo (body) 
 
 {
   "cpf": 12345678900,
-  "nome": "Beltrano",
+  "nome": "Ciclano",
   "data_nascimento": "1/01/2002",
   "nome_mae": "Mae do Beltrano",
   "cep": "54321",
@@ -142,12 +86,67 @@ Content-Type: application/json
   "municipio_uf": "Manaus",
   "pais": "Brasil"
 }
-###
 
-// Obter usuário pelo cpf
-GET http://127.0.0.1:5000/eleitor/70390243221
+###
+// Deletar usuário pelo cpf
+DELETE http://127.0.0.1:5000/eleitor/12345678910
 Content-Type: application/json
 
 
-// Utiliza-se obrigatoriamente no início da linha os simbolos: ###
-// para separar uma requisção da outra.
+// ---------------------------------------------
+// Testar todos os servico da api para usuario
+// ---------------------------------------------
+
+###
+POST http://127.0.0.1:5000/usuario
+Content-Type: application/json
+// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+
+{
+    "nome": "Lucas da Rocha Andrade",
+    "login": "Lucas",
+    "senha": "1234",
+    "email": "lrandrade20@gmail.com"
+}
+
+###
+POST http://127.0.0.1:5000/usuario
+Content-Type: application/json
+// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+
+{
+    "nome": "Bruno Pereira",
+    "login": "Bruno",
+    "senha": "1234",
+    "email": "bruno.pereira@ifam.edu.br"
+}
+
+###
+PUT http://127.0.0.1:5000/usuario
+Content-Type: application/json
+// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+
+{
+    "id": 3,
+    "nome": "Caio Cesar",
+    "login": "Caio",
+    "senha": "1234",
+    "email": "7caioc@gmail.com"
+}
+
+###
+// Listar todos os usuários em ordem alfabética do nome
+GET http://127.0.0.1:5000/usuario 
+Content-Type: application/json
+
+###
+// Obter usuário pelo ID
+//GET http://127.0.0.1:5000/usuario/id
+GET http://127.0.0.1:5000/usuario/1
+Content-Type: application/json
+
+###
+// Deletar usuário pelo ID
+// http://127.0.0.1:5000/usuario/id
+DELETE http://127.0.0.1:5000/usuario/3
+Content-Type: application/json
