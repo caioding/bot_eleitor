@@ -9,7 +9,8 @@ def criar_db():
             port='3306',
             user='mydb',
             password='neosdb',
-            database='banco'
+            database='banco',
+            auth_plugin='mysql_native_password'
         )
     except Exception as ex:
         print(f'Ocorreu erro na conexao com o Banco de Dados: {ex}')

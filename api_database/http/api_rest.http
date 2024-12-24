@@ -2,151 +2,71 @@
 // Testar todos os servico da api para eleitor
 // ---------------------------------------------
 
-###
+// Inserir eleitor
 POST http://127.0.0.1:5000/eleitor
 Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+// OBS: É necessário pular uma linha, quando existir um corpo (body)
 
 {
-  "cpf": 12345678900,
-  "nome": "Fulano",
-  "data_nascimento": "1/01/2001",
-  "nome_mae": "Mae do Fulano",
-  "cep": "12345",
-  "nro_endereco": "01",
-  "nro_titulo": "12345678900000",
-  "situacao": "Regular",
-  "secao": "1234",
-  "zona": "123",
-  "local_votacao": "Escolar",
-  "endereco_votacao": "Leste",
-  "bairro": "Manoa",
-  "municipio_uf": "Manaus",
-  "pais": "Brasil"
+    "cpf": "02732391204",
+    "nome": "ELINEIDE MENEZES DE NAZARE",
+    "data_nascimento": "09/08/1998",
+    "nome_mae": "ELINEIDE LOPES MENEZES",
+    "cep": "69058230",
+    "nro_endereco": "345",
+    "nro_titulo": "123456789",
+    "situacao": "REGULAR",
+    "secao": "0186",
+    "zona": "009",
+    "local_votacao": "C. E. GOVERNADOR GILBERTO MESTRINHO",
+    "endereco_votacao":"ESTRADA DO AEROPORTO SN",
+    "bairro": "SAO FRANCISCO",
+    "municipio_uf": "TEFE/AM",
+    "pais": "BRASIL"
 }
 // Utiliza-se obrigatoriamente no início da linha os simbolos: ###
-// para separar uma requisção da outra. 
-
+// para separar uma requisção da outra.
 ###
-POST http://127.0.0.1:5000/eleitor
-Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
 
-{
-  "cpf": 12345678910,
-  "nome": "Beltrano",
-  "data_nascimento": "1/01/2002",
-  "nome_mae": "Mae do Beltrano",
-  "cep": "54321",
-  "nro_endereco": "02",
-  "nro_titulo": "12345678900001",
-  "situacao": "Irregular",
-  "secao": "4321",
-  "zona": "321",
-  "local_votacao": "Estadual",
-  "endereco_votacao": "Norte",
-  "bairro": "Colonia",
-  "municipio_uf": "Manaus",
-  "pais": "Brasil"
-}
-// Utiliza-se obrigatoriamente no início da linha os simbolos: ###
-// para separar uma requisção da outra. 
-
-###
-// Listar todos os eleitores 
-GET http://127.0.0.1:5000/eleitor
-Content-Type: application/json
-
-###
-// Obter usuário pelo cpf
-//GET http://127.0.0.1:5000/eleitor/{cpf}
-GET http://127.0.0.1:5000/eleitor/12345678900
-Content-Type: application/json
-
-###
-// Alterar usuário pelo cpf
+// Alterar eleitor pelo cpf
 PUT http://127.0.0.1:5000/eleitor
 Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
+// OBS: É necessário pular uma linha, quando existir um corpo (body)
 
 {
-  "cpf": 12345678900,
-  "nome": "Ciclano",
-  "data_nascimento": "1/01/2002",
-  "nome_mae": "Mae do Beltrano",
-  "cep": "54321",
-  "nro_endereco": "02",
-  "nro_titulo": "12345678900001",
-  "situacao": "Irregular",
-  "secao": "4321",
-  "zona": "321",
-  "local_votacao": "Estadual",
-  "endereco_votacao": "Norte",
-  "bairro": "Colonia",
-  "municipio_uf": "Manaus",
-  "pais": "Brasil"
+    "cpf": "01416891293",
+    "nome": "TIAGO LOPES SILVA E SILVA",
+    "data_nascimento": "21/10/2005",
+    "nome_mae": "MARIA ALBERTA LOPES DA SILVA",
+    "cep": "69058230",
+    "nro_endereco": "344",
+    "nro_titulo": "987654321",
+    "situacao": "REGULAR",
+    "secao": "0186",
+    "zona": "009",
+    "local_votacao": "CMEI OLAVO BILAC",
+    "endereco_votacao":"ARGENTINA",
+    "bairro": "FLORES",
+    "municipio_uf": "MANAUS/AM",
+    "pais": "BRASIL"
 }
-
+// Utiliza-se obrigatoriamente no início da linha os simbolos: ###
+// para separar uma requisção da outra.
 ###
-// Deletar usuário pelo cpf
-DELETE http://127.0.0.1:5000/eleitor/12345678910
+
+// Listar todos os eleitores em ordem alfabética do nome
+GET http://127.0.0.1:5000/eleitor
 Content-Type: application/json
-
-
-// ---------------------------------------------
-// Testar todos os servico da api para usuario
-// ---------------------------------------------
-
 ###
-POST http://127.0.0.1:5000/usuario
+
+// Obter eleitor pelo cpf
+//GET http://127.0.0.1:5000/eleitor/cpf
+GET http://127.0.0.1:5000/eleitor/02732391204
 Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
-
-{
-    "nome": "Lucas da Rocha Andrade",
-    "login": "Lucas",
-    "senha": "1234",
-    "email": "lrandrade20@gmail.com"
-}
-
 ###
-POST http://127.0.0.1:5000/usuario
+
+// Deletar ELEITOR pelo cpf
+// http://127.0.0.1:5000/eleitor/cpf
+DELETE http://127.0.0.1:5000/eleitor/02732391204
 Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
-
-{
-    "nome": "Bruno Pereira",
-    "login": "Bruno",
-    "senha": "1234",
-    "email": "bruno.pereira@ifam.edu.br"
-}
-
 ###
-PUT http://127.0.0.1:5000/usuario
-Content-Type: application/json
-// OBS: É necessário pular uma linha, quando existir um corpo (body) 
-
-{
-    "id": 3,
-    "nome": "Caio Cesar",
-    "login": "Caio",
-    "senha": "1234",
-    "email": "7caioc@gmail.com"
-}
-
-###
-// Listar todos os usuários em ordem alfabética do nome
-GET http://127.0.0.1:5000/usuario 
-Content-Type: application/json
-
-###
-// Obter usuário pelo ID
-//GET http://127.0.0.1:5000/usuario/id
-GET http://127.0.0.1:5000/usuario/1
-Content-Type: application/json
-
-###
-// Deletar usuário pelo ID
-// http://127.0.0.1:5000/usuario/id
-DELETE http://127.0.0.1:5000/usuario/3
-Content-Type: application/json

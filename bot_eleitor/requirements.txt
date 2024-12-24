@@ -3,6 +3,7 @@ beautifulsoup4==4.12.3
 botcity-email-plugin==0.1.5
 botcity-framework-base==0.4.4
 botcity-framework-web==0.9.0
+botcity-http-plugin==0.1.4
 botcity-maestro-sdk==0.5.1
 certifi==2024.8.30
 chardet==5.2.0

@@ -1,7 +1,5 @@
-
 from repository import database
 from repository import eleitor
-from repository import usuario
 #import mysql.connector
 
 # Definindo uma variável global
